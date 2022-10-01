@@ -14,3 +14,6 @@ Content-Type: application/json
             "side squat lunges": "3S x 12R"
         }
 }
+
+###
+GET https://aguilarl5.onrender.com/routines/

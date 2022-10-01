@@ -2,10 +2,9 @@ const { MongoClient } = require('mongodb');
 const dotenv = require('dotenv');
 dotenv.config();
 let db;
-const MONGODB_URI = process.env.MONGODB_URI;
 
 function dbConnect() {
-  const uri = MONGODB_URI;
+  const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.1vqmd5v.mongodb.net/?retryWrites=true&w=majority&authSource=admin`;
 
   //Create new client with connection string
   const client = new MongoClient(uri);
