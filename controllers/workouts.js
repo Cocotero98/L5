@@ -40,4 +40,20 @@ const getSingle = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getSingle};
+const addRoutine = async (req, res) => {
+  const workout = {
+    type: req.body.type,
+    routine: req.body.routine
+};
+  const db = await mongodb.getDb();
+  db.db('workouts')
+    .collection('routines')
+    .insertOne(workout, (error, result) => {
+      if (error) {
+        return res.status(500).send(error);
+      }
+      res.send(result.result);
+    });
+};
+
+module.exports = { getAll, getSingle, addRoutine};

@@ -6,6 +6,8 @@ routes.get('/', workoutsController.getAll);
 
 routes.get('/:type', workoutsController.getSingle);
 
+routes.post('/', workoutsController.addRoutine);
+
 module.exports = routes;
 
 //---------NOTAS
