@@ -1,5 +1,5 @@
 const mongodb = require('../model/connection');
-// const ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
   try {
@@ -56,4 +56,38 @@ const addRoutine = async (req, res) => {
     });
 };
 
-module.exports = { getAll, getSingle, addRoutine};
+const updateRoutine = async (req, res) =>{
+  const userId = new ObjectId(req.params.id);
+  const db = await mongodb.getDb();
+  const response = await db.db('workouts')
+    .collection('routines')
+    .updateOne(
+      { _id: userId },
+      {
+        $set: {
+        type: req.body.type,
+        routine: req.body.routine
+      }
+    }
+  );
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the routine.');
+  }
+}
+
+const deleteWorkout = async (req, res)=>{
+  const userId = new ObjectId(req.params.id);
+  const db = await mongodb.getDb();
+  const response = await db.db('workouts')
+    .collection('routines')
+    .deleteOne({_id : userId})
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while deleting the routine.');
+    }
+}
+
+module.exports = { getAll, getSingle, addRoutine, updateRoutine, deleteWorkout};

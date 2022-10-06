@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 const bodyParser = require('body-parser');
 
-// const MONGODB_URI = process.env.MONGODB_URI;
 
 const app = express();
 
@@ -13,6 +12,10 @@ app.use(bodyParser.json()).use((req, res, next) => {
   });
 
 app.use('/', require('./routes'));
+
+process.on('uncaughtException', (error, source) => {
+  console.log(process.stderr.fd, `Caught exception: ${error}, Exception origin: ${source}`);
+});
 
 app.listen(3000, ()=>{
     console.log('Listening on port 3000');
