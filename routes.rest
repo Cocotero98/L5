@@ -6,9 +6,9 @@ POST http://localhost:3000/routines/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "type": "legs",
+    "type": "test",
         "routine":{
-            "squat": "3S x 8R x 80kg",
+            "squat": "testing",
             "hip thrust": "3S x 10R x 100kg",
             "bulgarian split squat": "3S x 10R x 30kg",
             "side squat lunges": "3S x 12R"

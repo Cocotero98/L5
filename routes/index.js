@@ -8,4 +8,6 @@ routes.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 routes.use('/routines', require('./routines'));
 
+routes.use('/history', require('./history'));
+
 module.exports = routes;

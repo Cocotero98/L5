@@ -3,12 +3,10 @@ const validate = require('../middlewares/validation');
 const { validationResult } = require('express-validator');
 let errors;
 
-const workoutsController = require('../controllers/workouts');
+const historyController = require('../controllers/history');
 const { requiresAuth } = require('express-openid-connect');
 
-routes.get('/', workoutsController.getAll);
-
-routes.get('/:type', workoutsController.getSingle);
+routes.get('/:client_id', historyController.getAll);
 
 routes.post('/', requiresAuth(),validate.workoutValidation,
 (req, res, next) => {
@@ -19,7 +17,7 @@ routes.post('/', requiresAuth(),validate.workoutValidation,
     } else {
       next();
     }
-  },workoutsController.addRoutine);
+  },historyController.addRoutine);
 
 routes.put('/:id',requiresAuth(),validate.workoutValidation,
 (req, res, next) => {
@@ -30,9 +28,9 @@ routes.put('/:id',requiresAuth(),validate.workoutValidation,
     } else {
       next();
     }
-  }, workoutsController.updateRoutine);
+  }, historyController.updateRoutine);
 
-routes.delete('/:id', requiresAuth(), workoutsController.deleteWorkout);
+routes.delete('/:id', requiresAuth(), historyController.deleteWorkout);
 
 module.exports = routes;
 
